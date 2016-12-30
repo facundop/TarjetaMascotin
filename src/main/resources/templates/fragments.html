@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Tarjeta Mascotin</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="../css/bootstrap-theme.min.css" />
+
+    <!-- Login theme -->
+    <link rel="stylesheet" href="../css/login.css" />
+</head>
+<body>
+    <div th:fragment="header">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Tarjeta Mascotin</a></li>
+                    <li><a href="/who">Quienes Somos</a></li>
+                    <li><a href="/services">Planes</a></li>
+                    <li><a href="/partner/registration">Profesionales</a></li>
+                    <li><a href="/user/registration">Socios</a></li>
+                    <li><a href="/user/status">Validar Socio</a></li>
+                    <li><a href="/contact">Contacto</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div th:fragment="footer">
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">&copy; 2016 Tarjeta Mascotin</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div th:fragment="recover-success">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="panel panel-login">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a href="#" class="active" id="login-form-link">La contraseña ha sido enviada al correo electrónico indicado.</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="registration-failed">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="panel panel-login">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <a href="#" class="active" id="login-form-link">El correo electrónico ingresado ya se encuentra registrado.</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="registration-success">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="panel panel-login">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <a href="#" class="active" id="login-form-link">Usted ha sido registrado.</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- jQuery library -->
+<script src="../js/jquery.min.js"></script>
+
+<!-- Login JavaScript -->
+<script src="../js/login.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="../js/bootstrap.min.js"></script>
+</body>
+</html>
