@@ -1,5 +1,7 @@
 package com.facundoprecentado.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,8 +17,10 @@ public class User {
     private String lastName;
     private Long dni;
     private String email;
-    private String password;
     private boolean enabled;
+
+    @JsonIgnore
+    private String password;
 
     protected User() {}
 
