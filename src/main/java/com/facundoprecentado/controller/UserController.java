@@ -9,9 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -41,6 +41,14 @@ public class UserController {
         }
 
         return "user-status-info";
+    }
+
+    @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody
+    List<User> getClients() {
+        List<User> clients = userRepository.findAll();
+
+        return clients;
     }
 
 }
