@@ -26,11 +26,13 @@ public class UserController {
 
     @RequestMapping("/user/status")
     public String userStatus(@ModelAttribute User user) {
+        log.info("userStatus");
         return "user-status";
     }
 
     @PostMapping("/user/status")
     public String showUserStatus(Model model, @ModelAttribute User user) {
+        log.info("showUserStatus");
         User userStatus = userRepository.findByDni(user.getDni());
         if(userStatus != null) {
             log.info("El usuario existe: " + userStatus);
@@ -46,6 +48,7 @@ public class UserController {
     @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     List<User> getClients() {
+        log.info("getClients");
         List<User> clients = userRepository.findAll();
 
         return clients;

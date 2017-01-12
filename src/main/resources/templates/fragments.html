@@ -13,31 +13,59 @@
     <link rel="stylesheet" href="/css/login.css" />
 </head>
 <body>
+    <!-- Header -->
     <div th:fragment="header">
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/">Tarjeta Mascotin</a></li>
-                    <li><a href="/who">Quienes Somos</a></li>
-                    <li><a href="/services">Planes</a></li>
-                    <li><a href="/partner/registration">Profesionales</a></li>
-                    <li><a href="/user/registration">Socios</a></li>
-                    <li><a href="/user/status">Validar Socio</a></li>
-                    <li><a href="/contact">Contacto</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+        <header class="header header-menu-fullw">
 
-    <div th:fragment="footer">
-        <nav class="navbar navbar-default navbar-fixed-bottom">
-            <div class="container">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/">&copy; 2016 Tarjeta Mascotin</a></li>
-                </ul>
+            <div class="header-main">
+                <div class="container">
+                    <!-- Logo -->
+                    <div class="text-center">
+                        <a href="/"><img src="images/logo.png" alt="Tarjeta Mascotin" /></a>
+                    </div>
+                    <!-- Logo / End -->
+                </div>
             </div>
-        </nav>
+
+            <nav class="nav-main">
+                <div class="container">
+                    <ul data-breakpoint="992" class="flexnav">
+                        <li><a href="/">Inicio</a></li>
+                        <li><a href="/plans">Planes</a></li>
+                        <li><a href="/user">Clientes</a></li>
+                        <li><a href="/partner">Negocios</a></li>
+                        <li><a href="/contacts">Contacto</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
     </div>
+    <!-- Header / End -->
+
+    <!-- Footer -->
+    <div th:fragment="footer">
+        <footer class="footer" id="footer">
+            <div class="footer-copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4">
+                            Copyright &copy; 2017  <a href="/">TarjetaMascotin</a> &nbsp;
+                        </div>
+                        <div class="col-sm-6 col-md-8">
+                            <div class="social-links-wrapper">
+                                <ul class="social-links social-links__light">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- Footer / End -->
 
     <div th:fragment="recover-success">
         <div class="container">

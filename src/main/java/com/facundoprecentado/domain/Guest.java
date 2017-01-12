@@ -4,6 +4,7 @@ public class Guest {
 
     private String name;
     private String email;
+    private String subject;
     private String message;
 
     public String getName() {
@@ -20,6 +21,14 @@ public class Guest {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public String getMessage() {

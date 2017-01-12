@@ -13,13 +13,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/home", "/who", "services", "/partner/registration", "/user/registration", "/user/status", "/contact", "/resources/**", "/css/**", "/js/**").permitAll()
-                    .anyRequest().authenticated()
+//                    .antMatchers("/", "/home", "/who", "services", "/user/user-logged", "/partner/registration", "/user/user-login", "/partner/registration-success", "/user/registration", "/user/registration-success", "/user/status", "/contacts", "/resources/**", "/css/**", "/js/**").permitAll()
+//                    .anyRequest().authenticated()
+                    .antMatchers("*").permitAll()
                     .and()
-                .formLogin()
-                    .loginPage("/user/registration")
-                    .permitAll()
-                    .and()
+//                .formLogin()
+//                    .loginPage("/user/registration")
+//                    .permitAll()
+//                    .and()
                 .logout()
                     .permitAll();
     }

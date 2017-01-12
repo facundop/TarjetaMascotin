@@ -27,30 +27,9 @@ public class RegistrationController {
     @Autowired
     private PartnerRepository partnerRepository;
 
-    @RequestMapping("/user/recover")
-    public String userRecover(User user) {
-        return "user-recover";
-    }
-
-    @PostMapping("/user/recover-success")
-    public String userRecoverSuccess(@ModelAttribute User user) {
-        User recoverUser = userRepository.findByEmail(user.getEmail());
-        log.info("Recuperando la contraseña de: " + user.getEmail());
-        if(recoverUser != null) {
-            log.info("Enviando la contraseña de: " + recoverUser);
-            mailService.sendUserPassword(recoverUser);
-        }
-        return "recover-success";
-    }
-
-    @RequestMapping("/user/registration")
-    public String userRegister(User user) {
-        return "user-registration";
-    }
-
     @PostMapping("/user/registration-success")
     public String userRegisterSuccess(@ModelAttribute User user) {
-
+        log.info("userRegisterSuccess");
         // Verifico si el usuario existe
         User registeredUser = userRepository.findByEmail(user.getEmail());
         log.info("Verificando si existe el usuario: " + user.getEmail());
@@ -74,11 +53,13 @@ public class RegistrationController {
 
     @RequestMapping("/partner/recover")
     public String partnerRecover(Partner partner) {
+        log.info("partnerRecover");
         return "partner-recover";
     }
 
     @PostMapping("/partner/recover-success")
     public String partnerRecoverSuccess(@ModelAttribute Partner partner) {
+        log.info("partnerRecoverSuccess");
         Partner recoverPartner = partnerRepository.findByEmail(partner.getEmail());
         log.info("Recuperando la contraseña de: " + partner.getEmail());
         if(recoverPartner != null) {
@@ -90,15 +71,16 @@ public class RegistrationController {
 
     @RequestMapping("/partner/registration")
     public String partnerRegister(Partner partner) {
+        log.info("partnerRegister");
         return "partner-registration";
     }
 
     @PostMapping("/partner/registration-success")
     public String partnerRegisterSuccess(@ModelAttribute Partner partner) {
-
+        log.info("partnerRegisterSuccess");
         // Verifico si el usuario existe
-        Partner registeredPartner = partnerRepository.findByEmail(partner.getEmail());
         log.info("Verificando si existe el usuario: " + partner.getEmail());
+        Partner registeredPartner = partnerRepository.findByEmail(partner.getEmail());
         if(registeredPartner == null) {
             log.info("Registrando el usuario: " + partner.getEmail());
             // Creo usuario
@@ -115,5 +97,21 @@ public class RegistrationController {
         }
 
         return "registration-success";
+    }
+
+    @PostMapping("/user/user-login")
+    public String userLogin(@ModelAttribute User user) {
+        log.info("userLogin");
+        // Verifico si el usuario existe
+        User registeredUser = userRepository.findByEmail(user.getEmail());
+        log.info("Verificando si existe el usuario: " + user.getEmail());
+        if(registeredUser == null) {
+            // TODO si el usuario es nulo, no esta registrado. Mandarlo al login otra vez
+            return "registration-failed";
+        }
+
+        log.info("Usuario logeado: " + user.getEmail());
+
+        return "user-logged";
     }
 }

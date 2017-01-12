@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<!--[if IE 7]>                  <html class="ie7 no-js" lang="en">     <![endif]-->
+<!--[if lte IE 8]>              <html class="ie8 no-js" lang="en">     <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="not-ie no-js" lang="en">  <!--<![endif]-->
 <head>
 
 	<!-- Basic Page Needs
 	================================================== -->
 	<meta charset="utf-8">
-	<title>Pronto | TarjetaMascotin</title>
+	<title>Coming Soon | PetSitter Responsive HTML5 Template</title>
 	<meta name="description" content="Stability - Responsive HTML5 Template - 1.0">
 	<meta name="author" content="http://themeforest.net/user/dan_fisher">
 
@@ -59,18 +61,22 @@
 <body>
 
 	<div class="site-wrapper">
-
+		
 		<!-- Header -->
-		<header class="header header-menu-fullw">
+		<header class="header header-coming-soon">
+
 			<div class="header-main">
 				<div class="container">
 					<!-- Logo -->
-					<div class="text-center">
-						<a href="/"><img src="images/logo.png" alt="Tarjeta Mascotin" /></a>
+					<div class="logo">
+						<a href="index.html"><img src="images/logo-alt.png" alt="PetSitter"></a>
+						<!-- <h1><a href="index.html"><span>Pet</span>Sitter</a></h1>
+						<p class="tagline">Find an Awesome PetSitter</p> -->
 					</div>
 					<!-- Logo / End -->
 				</div>
 			</div>
+			
 		</header>
 		<!-- Header / End -->
 
@@ -78,11 +84,13 @@
 		<div class="main main__padd-top" role="main">
 
 			<!-- Page Content -->
+			<section class="page-content">
 				<div class="container">
 
 					<div class="row">
 						<div class="col-md-8 col-md-offset-2 text-center">
-							<p>Pronto tendras un nuevo servicio para tu mascota.</p>
+							<h1>Our Site is launching soon...</h1>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer quis congue eros. Quisque sagittis volutpat metus nec tristique. Justo, id egestas ligula fringilla interdum. Suspendisse id justo non nibh volutpat faucibus et vel justo.</p>
 						</div>
 					</div>
 
@@ -90,22 +98,22 @@
 						<div class="row">
 							<div class="col-sm-3 col-md-3 col-lg-offset-2 col-lg-2 text-center">
 								<input class="knob" id="days" data-readonly=true data-min="0" data-max="99" data-skin="tron" data-width="165" data-height="165" data-thickness="0.2" data-fgcolor="#a6ce39">
-								<span class="count-label">días</span>
+								<span class="count-label">days</span>
 							</div>
 							
 							<div class="col-sm-3 col-md-3 col-lg-2">
 								<input class="knob" id="hours" data-readonly=true data-min="0" data-max="24" data-skin="tron" data-width="165" data-height="165" data-thickness="0.2" data-fgcolor="#a6ce39">
-								<span class="count-label">horas</span>
+								<span class="count-label">hours</span>
 							</div>
 							
 							<div class="col-sm-3 col-md-3 col-lg-2">
 								<input class="knob" id="mins" data-readonly=true data-min="0" data-max="60" data-skin="tron" data-width="165" data-height="165" data-thickness="0.2" data-fgcolor="#a6ce39">
-								<span class="count-label">minutos</span>
+								<span class="count-label">minutes</span>
 							</div>
 							
 							<div class="col-sm-3 col-md-3 col-lg-2">
 								<input class="knob" id="secs" data-readonly=true data-min="0" data-max="60" data-skin="tron" data-width="165" data-height="165" data-thickness="0.2" data-fgcolor="#a6ce39">
-								<span class="count-label">segundos</span>
+								<span class="count-label">seconds</span>
 							</div>
 						</div>
 					</div>
@@ -116,11 +124,47 @@
 						</div>
 					</div>
 
+					<div class="row">
+						<div class="col-md-4 col-md-offset-4">
+							<form action="#" class="newsletter-form">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="Enter your email here">
+									<span class="input-group-btn">
+										<button class="btn btn-success" type="button"><i class="fa fa-arrow-circle-o-right"></i></button>
+									</span>
+								</div>
+							</form>
+						</div>
+					</div>
+
 				</div>
+			</section>
 			<!-- Page Content / End -->
 
 			<!-- Footer -->
-			<div th:replace="fragments :: footer"> </div>
+			<footer class="footer" id="footer">
+				<div class="footer-copyright">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-6 col-md-4">
+								Copyright &copy; 2014  <a href="index.html">PetSitter</a> &nbsp;| &nbsp;All Rights Reserved
+							</div>
+							<div class="col-sm-6 col-md-8">
+								<div class="social-links-wrapper">
+									<span class="social-links-txt">Keep in Touch</span>
+									<ul class="social-links social-links__light">
+										<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+										<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+										<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+										<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+										<li><a href="#"><i class="fa fa-rss"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
 			<!-- Footer / End -->
 			
 		</div>
