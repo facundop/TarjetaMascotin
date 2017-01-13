@@ -120,7 +120,8 @@
 												data-msg-required="Por favor ingrese su nombre."
 												class="form-control"
 												name="name" id="name"
-											    th:field="*{name}" >
+											    required
+												th:field="*{name}" >
 										</div>
 									</div>
 									<div class="col-md-4">
@@ -133,6 +134,7 @@
 												class="form-control"
 												name="email"
 												id="email"
+											    required
 											    th:field="*{email}">
 										</div>
 									</div>
@@ -145,6 +147,7 @@
 												class="form-control"
 												name="subject"
 												id="subject"
+											    required
 											    th:field="*{subject}" >
 										</div>
 									</div>
@@ -159,6 +162,7 @@
 												class="form-control"
 												name="message"
 												id="message"
+												required
 												th:field="*{message}" ></textarea>
 										</div>
 									</div>

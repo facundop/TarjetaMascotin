@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<!--[if IE 7]>                  <html class="ie7 no-js" lang="en">     <![endif]-->
-<!--[if lte IE 8]>              <html class="ie8 no-js" lang="en">     <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--> <html class="not-ie no-js" lang="en">  <!--<![endif]-->
 <head>
 
 	<!-- Basic Page Needs
 	================================================== -->
 	<meta charset="utf-8">
-	<title>Contacto | TarjetaMascotin</title>
+	<title>Login | TarjetaMascotin</title>
 	<meta name="description" content="PetSitter - Responsive HTML5 Template - 1.0">
 	<meta name="author" content="http://themeforest.net/user/dan_fisher">
 
@@ -75,12 +72,12 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6">
-							<h1>Contacts</h1>
+							<h1>Login</h1>
 						</div>
 						<div class="col-md-6">
 							<ul class="breadcrumb">
-								<li><a href="index.html">Home</a></li>
-								<li class="active">Contacto</li>
+								<li><a href="/">Inicio</a></li>
+								<li class="active">Login</li>
 							</ul>
 						</div>
 					</div>
@@ -90,72 +87,42 @@
 
 			<!-- Page Content -->
 			<section class="page-content">
-
 				<div class="container">
-
-					<!-- Google Map -->
-					<div class="googlemap-wrapper">
-						<div id="map_canvas" class="map-canvas"></div>
-					</div>
-					<!-- Google Map / End -->
 					
 					<div class="row">
-						<div class="col-md-9">
-							<h2>Formulario de contacto</h2>
-							<form action="#" id="contact-form" th:action="@{/contacts}" th:object="${guest}" method="post" role="form">
-
-								<div class="alert alert-success" id="contact-alert-success">
-									<strong>Mensaje Enviado!</strong> Gracias. Responderemos a la brevedad!
+						<div class="col-md-12">
+							<div class="box">
+								<h3>Login</h3>
+								<div th:if="${param.error}">
+									Credenciales no válidas.
 								</div>
-
-							</form>
-						</div>
-						<div class="col-md-3">
-							<hr class="visible-sm visible-xs lg">
-							<!-- Widget :: Contacts Info -->
-							<div class="contacts-widget widget widget__sidebar">
-								<h3 class="widget-title">Contacto</h3>
-								<div class="widget-content">
-									<ul class="contacts-info-list">
-										<li>
-											<i class="fa fa-map-marker"></i>
-											<div class="info-item">
-												Dirección
-											</div>
-										</li>
-										<li>
-											<i class="fa fa-phone"></i>
-											<div class="info-item">
-												Teléfono
-											</div>
-										</li>
-										<li>
-											<i class="fa fa-envelope"></i>
-											<span class="info-item">
-												<a href="mailto:info@dan-fisher.com">Email</a>
-											</span>
-										</li>
-										<li>
-											<i class="fa fa-skype"></i>
-											<div class="info-item">
-												<a href="#">Skype</a>
-											</div>
-										</li>
-										<li>
-											<i class="fa fa-clock-o"></i>
-											<div class="info-item">
-												Días y Horarios
-											</div>
-										</li>
-									</ul>
+								<div th:if="${param.logout}">
+									Hasta pronto.
 								</div>
+								<form id="login-form" action="#" th:action="@{/login}" th:object="${user}" method="POST" role="form">
+									<div class="form-group">
+										<label>Email <span class="required">*</span></label>
+										<input type="text" name="username" th:field="*{username}" class="form-control">
+									</div>
+									<div class="form-group">
+										<div class="clearfix">
+											<label class="pull-left">
+												Clave <span class="required">*</span>
+											</label>
+											<span class="pull-right"><a href="/recover">Olvidaste la clave?</a></span>
+										</div>
+										<input type="password" name="password" th:field="*{password}" class="form-control">
+									</div>
+									<button type="submit" class="btn btn-primary btn-inline">Login</button>&nbsp; &nbsp; &nbsp; 
+									<label for="remember" class="checkbox-inline">
+										<input type="checkbox" name="remember" id="remember"> Recordarme
+									</label>
+								</form>
 							</div>
-							<!-- /Widget :: Contacts Info -->
 						</div>
 					</div>
 
 				</div>
-
 			</section>
 			<!-- Page Content / End -->
 
@@ -187,39 +154,13 @@
 	<script src="vendor/jquery.appear.js"></script>
 	<script src="vendor/jquery.stellar.min.js"></script>
 
+	<!-- Newsletter Form -->
+	<script src="vendor/jquery.validate.js"></script>
+	<script src="js/newsletter.js"></script>
+
 	<script src="js/custom.js"></script>
 
 
-	<!-- Contact Page specific scripts
-	================================================== -->
-
-	<!-- Contact Form -->
-	<script src="vendor/jquery.validate.js"></script>
-
-	<!-- Newsletter Form -->
-	<script src="js/newsletter.js"></script>
 	
-	<!-- Google Map -->
-	<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-	<script src="vendor/jquery.gmap3.min.js"></script>
-	
-	<!-- Google Map Init-->
-	<script type="text/javascript">
-		jQuery(function($){
-			$('#map_canvas').gmap3({
-				marker:{
-					address: '40.717599,-74.005136' 
-				},
-					map:{
-					options:{
-					zoom: 17,
-					scrollwheel: false,
-					streetViewControl : true
-					}
-				}
-		    });
-		});
-	</script>
-
 </body>
 </html>

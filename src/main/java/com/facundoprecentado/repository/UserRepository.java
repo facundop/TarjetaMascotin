@@ -5,11 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends CrudRepository<User, String> {
     List<User> findAll();
-    List<User> findById(Long id);
-    User findByEmail(String email);
-    User findByDni(Long dni);
-    List<User> findByLastName(String lastName);
+    User findByUsername(String id);
 }
 

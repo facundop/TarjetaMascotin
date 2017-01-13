@@ -30,20 +30,20 @@ public class UserController {
         return "user-status";
     }
 
-    @PostMapping("/user/status")
-    public String showUserStatus(Model model, @ModelAttribute User user) {
-        log.info("showUserStatus");
-        User userStatus = userRepository.findByDni(user.getDni());
-        if(userStatus != null) {
-            log.info("El usuario existe: " + userStatus);
-            model.addAttribute(userStatus);
-        } else {
-            log.info("El usuario no existe");
-            return "user-status-info-failed";
-        }
-
-        return "user-status-info";
-    }
+//    @PostMapping("/user/status")
+//    public String showUserStatus(Model model, @ModelAttribute User user) {
+//        log.info("showUserStatus");
+//        User userStatus = userRepository.findByDni(user.getDni());
+//        if(userStatus != null) {
+//            log.info("El usuario existe: " + userStatus);
+//            model.addAttribute(userStatus);
+//        } else {
+//            log.info("El usuario no existe");
+//            return "user-status-info-failed";
+//        }
+//
+//        return "user-status-info";
+//    }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
