@@ -1,6 +1,8 @@
 package com.facundoprecentado.controller;
 
 import com.facundoprecentado.domain.*;
+import com.facundoprecentado.repository.AsociadoRepository;
+import com.facundoprecentado.repository.UbicacionRepository;
 import com.facundoprecentado.repository.UserRepository;
 import com.facundoprecentado.service.MailService;
 import org.slf4j.Logger;
@@ -12,12 +14,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -33,6 +34,12 @@ public class HomeController {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private UbicacionRepository ubicacionRepository;
+
+    @Autowired
+    private AsociadoRepository asociadoRepository;
 
     @RequestMapping("/")
     public String index() {
@@ -62,6 +69,64 @@ public class HomeController {
         log.info("GET login");
         model.addAttribute("user", new User());
         return "login";
+    }
+
+    @RequestMapping(value = "/asociados", method = RequestMethod.GET)
+    public String ubicaciones(Model model) {
+        log.info("GET ubicaciones");
+        List<Ubicacion> departamentos = ubicacionRepository.findDepartamentos();
+        model.addAttribute("departamentos", departamentos);
+        return "asociados";
+    }
+
+    /*
+     * Busco las Provincias por el ID Departamento
+     */
+    @RequestMapping(value = "/provincias/{idDepartamento}", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody
+    List<Ubicacion> getProvinciasByIdDepartamento(@PathVariable(value="idDepartamento") Integer idDepartamento) {
+        log.info("getProvinciasByIdDepartamento " + idDepartamento);
+        List<Ubicacion> provincias = ubicacionRepository.findProvinciasByDepartamento(idDepartamento);
+        return provincias;
+    }
+
+    /*
+     * Busco los Distritos por el ID Departamento y el ID Provincia
+     */
+    @RequestMapping(value = "/distritos/{idDepartamento}/{idProvincia}", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody
+    List<Ubicacion> getDistritosByIdProvincia(@PathVariable(value="idDepartamento") Integer idDepartamento, @PathVariable(value="idProvincia") Integer idProvincia) {
+        log.info("getDistritosByIdProvincia " + idDepartamento + idProvincia);
+        List<Ubicacion> distritos = ubicacionRepository.findDistritosByDepartamentoAndProvincia(idDepartamento, idProvincia);
+
+        for(Ubicacion u : distritos) {
+            System.out.println("Distrito: " + u.getIdDistrito() + u.getNombreDistrito());
+        }
+        return distritos;
+    }
+
+    /*
+     * Busco los Asoaciados que perteneces a un ID Distrito especifico
+     */
+    @RequestMapping(value = "/asociados/byDistrito/{idDistrito}", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody
+    List<Asociado> getAsociadosByIdDistrito(@PathVariable(value="idDistrito") Integer idDistrito) {
+        log.info("getAsociadosByIdDistrito");
+        List<Asociado> asociados = asociadoRepository.findByIdDistrito(idDistrito);
+
+        return asociados;
+    }
+
+    /*
+     * Busco un Asoaciado por su ID
+     */
+    @RequestMapping(value = "/asociados/{idAsociado}", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody
+    Asociado getAsociadosById(@PathVariable(value="idAsociado") Integer idAsociado) {
+        log.info("getAsociadosByIdDistrito");
+        Asociado asociado = asociadoRepository.findByIdAsociado(idAsociado);
+
+        return asociado;
     }
 
     @RequestMapping("/registration")
@@ -122,6 +187,15 @@ public class HomeController {
         }
 
         return "password-recover-success";
+    }
+
+    @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody
+    List<User> getClients() {
+        log.info("getClients");
+        List<User> clients = userRepository.findAll();
+
+        return clients;
     }
 
 }
