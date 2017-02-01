@@ -50,6 +50,10 @@ public class HomeController {
     @RequestMapping("/home")
     public String home(Model model) {
         log.info("home");
+
+        List<Ubicacion> departamentos = ubicacionRepository.findDepartamentos();
+        model.addAttribute("departamentos", departamentos);
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         model.addAttribute("user", auth.getPrincipal());
@@ -69,14 +73,6 @@ public class HomeController {
         log.info("GET login");
         model.addAttribute("user", new User());
         return "login";
-    }
-
-    @RequestMapping(value = "/asociados", method = RequestMethod.GET)
-    public String ubicaciones(Model model) {
-        log.info("GET ubicaciones");
-        List<Ubicacion> departamentos = ubicacionRepository.findDepartamentos();
-        model.addAttribute("departamentos", departamentos);
-        return "asociados";
     }
 
     /*
@@ -99,9 +95,6 @@ public class HomeController {
         log.info("getDistritosByIdProvincia " + idDepartamento + idProvincia);
         List<Ubicacion> distritos = ubicacionRepository.findDistritosByDepartamentoAndProvincia(idDepartamento, idProvincia);
 
-        for(Ubicacion u : distritos) {
-            System.out.println("Distrito: " + u.getIdDistrito() + u.getNombreDistrito());
-        }
         return distritos;
     }
 

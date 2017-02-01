@@ -11,6 +11,7 @@ public class Asociado {
     private String nombreNegocio;
     private String descripcion;
     private int idDistrito;
+    private String horarioAtencion;
 
     public int getIdAsociado() {
         return idAsociado;
@@ -42,5 +43,13 @@ public class Asociado {
 
     public void setIdDistrito(int idDistrito) {
         this.idDistrito = idDistrito;
+    }
+
+    public String getHorarioAtencion() {
+        return horarioAtencion;
+    }
+
+    public void setHorarioAtencion(String horarioAtencion) {
+        this.horarioAtencion = horarioAtencion;
     }
 }
