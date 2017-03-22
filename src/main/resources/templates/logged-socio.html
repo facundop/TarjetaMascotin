@@ -69,12 +69,12 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6">
-							<h1>Registro</h1>
+							<h1>Socio</h1>
 						</div>
 						<div class="col-md-6">
 							<ul class="breadcrumb">
 								<li><a href="/">Inicio</a></li>
-								<li class="active">Registro</li>
+								<li class="active">Socio</li>
 							</ul>
 						</div>
 					</div>
@@ -89,30 +89,25 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="box">
-								<h3>Registro</h3>
-								<form id="registration-form" action="#" th:action="@{/registration}" th:object="${user}" method="POST" role="form">
+								<h3>Por favor completa tus datos.</h3>
+								<form id="registration-form" action="#" th:action="@{/logged-socio-save}" th:object="${socio}" method="POST" role="form">
 										<div class="form-group">
-											<label>Quiero ser <span class="required">*</span></label>
-											<select th:field="*{type}" class="form-control" name="type">
-												<option value="0">Socio</option>
-												<option value="1">Asociado</option>
-												/>
-											</select>
+											<label>Usuario <span class="required">*</span></label>
+											<input type="text" name="username" th:field="*{username}" class="form-control" readonly>
 										</div>
 										<div class="form-group">
-											<label>Email <span class="required">*</span></label>
-											<input type="text" name="username" th:field="*{username}" class="form-control">
+											<label>Nombre <span class="required">*</span></label>
+											<input type="text" name="nombre" th:field="*{nombre}" class="form-control">
 										</div>
 										<div class="form-group">
-											<div class="clearfix">
-												<label class="pull-left">
-													Clave <span class="required">*</span>
-												</label>
-												<span class="pull-right"><a href="/recover">Olvidaste la clave?</a></span>
-											</div>
-											<input type="password" name="password" th:field="*{password}" class="form-control">
+											<label>Apellido <span class="required">*</span></label>
+											<input type="text" name="nombre" th:field="*{apellido}" class="form-control">
 										</div>
-										<button type="submit" class="btn btn-primary btn-inline">Registrarme</button>&nbsp; &nbsp; &nbsp;
+										<div class="form-group">
+											<label>DNI <span class="required">*</span></label>
+											<input type="number" name="nombre" th:field="*{dni}" class="form-control">
+										</div>
+										<button type="submit" class="btn btn-primary btn-inline">Guardar</button>&nbsp; &nbsp; &nbsp;
 								</form>
 							</div>
 						</div>

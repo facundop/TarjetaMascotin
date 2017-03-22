@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
     <title>Tarjeta Mascotin</title>
@@ -32,8 +32,10 @@
                     <ul data-breakpoint="992" class="flexnav">
                         <li><a href="/home">Inicio</a></li>
                         <li><a href="/plans">Planes</a></li>
-                        <li><a href="/login">Login</a></li>
-                        <li><a href="/registration">Registro</a></li>
+                        <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
+                        <li sec:authorize="!isAuthenticated()"><a href="/registration">Registro</a></li>
+                        <li sec:authorize="isAuthenticated()"><a href="/login">Ver mi perfil - <span sec:authentication="name"></span></a></li>
+                        <li sec:authorize="isAuthenticated()"><a href="/logout">Desconectarse</a></li>
                         <li><a href="/contacts">Contacto</a></li>
                     </ul>
                 </div>
@@ -54,9 +56,9 @@
                         <div class="col-sm-6 col-md-8">
                             <div class="social-links-wrapper">
                                 <ul class="social-links social-links__light">
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a href="https://www.facebook.com/Tarjeta-Mascotin-1800110913588760/"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://twitter.com/TarjetaMascotin"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/tarjeta-mascotin-507496134?authType=&authToken=&trk=mp-allpost-aut-name"><i class="fa fa-linkedin"></i></a></li>
                                 </ul>
                             </div>
                         </div>

@@ -2,6 +2,7 @@ package com.facundoprecentado.controller;
 
 import com.facundoprecentado.domain.*;
 import com.facundoprecentado.repository.AsociadoRepository;
+import com.facundoprecentado.repository.SocioRepository;
 import com.facundoprecentado.repository.UbicacionRepository;
 import com.facundoprecentado.repository.UserRepository;
 import com.facundoprecentado.service.MailService;
@@ -9,13 +10,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.SecurityContextProvider;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -41,37 +45,56 @@ public class HomeController {
     @Autowired
     private AsociadoRepository asociadoRepository;
 
+    @Autowired
+    private SocioRepository socioRepository;
+
     @RequestMapping("/")
     public String index() {
-        log.info("index");
-        return "index";
+        return "home";
     }
 
     @RequestMapping("/home")
-    public String home(Model model) {
-        log.info("home");
-
+    public String home(Model model, Principal principal) {
         List<Ubicacion> departamentos = ubicacionRepository.findDepartamentos();
         model.addAttribute("departamentos", departamentos);
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(principal != null) { // Esta logeado
+            log.info("Usuario logeado: " + principal.getName());
+        }
 
-        model.addAttribute("user", auth.getPrincipal());
-        log.info("Authenticated: " + auth.isAuthenticated());
-        log.info("User: " + auth.getPrincipal().toString());
         return "home";
     }
 
     @RequestMapping("/plans")
     public String plans() {
-        log.info("plans");
         return "plans";
     }
 
     @RequestMapping("/login")
-    public String login(Model model) {
-        log.info("GET login");
+    public String login(Model model, Principal principal) {
         model.addAttribute("user", new User());
+
+        if(principal != null) { // Esta logeado
+            log.info("principal " + principal.getName());
+            User user = userRepository.findByUsername(principal.getName());
+            if(user.getType() == 0) { // Es Socio
+                // TODO Tengo que buscar sus datos y ver si existe.
+                Socio socio = socioRepository.findOne(user.getUsername());
+                if(socio == null) { // No tiene nada guardado
+                    socio = new Socio();
+                    socio.setUsername(user.getUsername());
+                }
+
+                model.addAttribute("socio", socio);
+
+                return "logged-socio";
+            } else if(user.getType() == 1) { // Es Asociado
+                return "logged-asociado";
+            }
+        } else {
+            log.info("not logged");
+        }
+
         return "login";
     }
 
@@ -131,19 +154,49 @@ public class HomeController {
 
     @PostMapping("/registration")
     public String registration(@ModelAttribute User user) {
-        log.info("registration");
-        log.info("Registrando usuario: " + user.getUsername());
+        log.info("POST registration");
+        log.info("Intentando registrar usuario: " + user.getUsername());
+
+        if(!isUserRegistered(user)) {
+            try {
+                user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+                userRepository.save(user);
+                return "registration-success";
+            } catch (Error e) {
+                return "error";
+            }
+        } else {
+            return "registration-fail";
+        }
+
+
+
+        // TODO comprobar que se registre y en caso de error actuar
+
+
+    }
+
+    private boolean isUserRegistered(User user) {
+        if(userRepository.findByUsername(user.getUsername()) == null) {
+            return false;
+        }
+        return true;
+    }
+
+    @PostMapping("/logged-socio-save")
+    public String saveSocioDetails(@ModelAttribute Socio socio) {
+        log.info("saveSocioDetails");
+        log.info("Guardanto datos de usuario: " + socio.getUsername());
 
         try {
-            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            userRepository.save(user);
+            socioRepository.save(socio);
         } catch (Error e) {
             return "error";
         }
 
         // TODO comprobar que se registre y en caso de error actuar
 
-        return "registration-success";
+        return "socio-save-success";
     }
 
     @RequestMapping("/contacts")
@@ -180,15 +233,6 @@ public class HomeController {
         }
 
         return "password-recover-success";
-    }
-
-    @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    List<User> getClients() {
-        log.info("getClients");
-        List<User> clients = userRepository.findAll();
-
-        return clients;
     }
 
 }

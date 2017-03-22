@@ -60,7 +60,7 @@
 	z-index: 2;
 	display: block;
 	background: red;
-	background: #a6ce39;
+	background: #f98e23;
 	content:"";
 	-webkit-transition: all 200ms ease-in-out;
 	-moz-transition: all 200ms ease-in-out;
@@ -168,7 +168,7 @@
 }
 
 .owl-theme .owl-pagination .owl-page.active span {
-	background-color: #a6ce39;
+	background-color: #f98e23;
 	-webkit-transform: scale(1.5);
 	transform: scale(1.5);
 }
@@ -207,7 +207,7 @@
 		height: 24px;
 		line-height: 21px;
 		border-radius: 4px;
-		background: #a6ce39;
+		background: #f98e23;
 		border: 1px solid #fff;
 		text-align: center;
 		font-size: 14px;
