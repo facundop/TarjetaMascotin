@@ -1,12 +1,15 @@
 package com.facundoprecentado.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity(name = "socios")
 public class Socio {
 
     @Id
+    @GeneratedValue
+    private Long id;
     private String username;
     private String nombre;
     private String apellido;
@@ -42,5 +45,13 @@ public class Socio {
 
     public void setDni(int dni) {
         this.dni = dni;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

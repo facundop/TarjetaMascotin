@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+	<!-- Basic Page Needs
+	================================================== -->
+	<meta charset="utf-8" />
+	<title>Inicio | TarjetaMascotin</title>
+	<meta name="description" content="PetSitter - Responsive HTML5 Template - 1.0" />
+	<meta name="author" content="http://themeforest.net/user/dan_fisher" />
+
+
+	<!-- Mobile Specific Metas
+	================================================== -->
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	
+	<!-- Google Web Fonts
+	================================================== -->
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic|Bitter:700' rel='stylesheet' type='text/css' />
+	
+	<!-- CSS
+	================================================== -->
+	<!-- Base + Vendors CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/fonts/font-awesome/css/font-awesome.css" />
+	<link rel="stylesheet" href="css/fonts/entypo/css/entypo.css" />
+	<link rel="stylesheet" href="vendor/owl-carousel/owl.carousel.css" media="screen" />
+	<link rel="stylesheet" href="vendor/owl-carousel/owl.theme.css" media="screen" />
+	<link rel="stylesheet" href="vendor/magnific-popup/magnific-popup.css" media="screen" />
+	<link rel="stylesheet" href="vendor/flexslider/flexslider.css" media="screen" />
+
+	<!-- Theme CSS-->
+	<link rel="stylesheet" href="css/theme.css" />
+	<link rel="stylesheet" href="css/theme-elements.css" />
+	<link rel="stylesheet" href="css/animate.min.css" />
+
+
+
+	<!-- Head Libs -->
+	<script src="vendor/modernizr.js"></script>
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="vendor/respond.min.js"></script>
+	<![endif]-->
+
+	<!--[if IE]>
+		<link rel="stylesheet" href="css/ie.css" />
+	<![endif]-->
+	
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="images/favicon.ico" />
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" />
+	<link rel="apple-touch-icon" sizes="144x144" href="images/apple-touch-icon-144x144.png" />
+	
+</head>
+<body>
+
+	<div class="site-wrapper">
+
+		<!-- Header -->
+        <div th:replace="fragments :: header"> </div>
+		<!-- Header / End -->
+
+        <!-- Main -->
+        <div class="main" role="main">
+
+            <!-- Page Heading -->
+            <section class="page-heading">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1>Inicio</h1>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="breadcrumb">
+                                <li class="active">Inicio</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Page Heading / End -->
+
+            <!-- Page Content -->
+            <section class="page-content">
+                <div class="container">
+                    <div class="row box">
+                        <div class="col-md-6">
+                            <h2>Nuestra red de socios</h2>
+
+                            <div class="form-group">
+                                <h4>Departamento: </h4>
+                                <div class="select-style">
+                                    <select id="departamentos" name="departamentos" onchange="getProvincias(this.value)">
+                                        <option value="0">Seleccione un departamento</option>
+                                        <option th:each="departamento : ${departamentos}" th:value="${departamento.idDepartamento}" th:text="${departamento.nombreDepartamento}"
+                                        />
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group provincias">
+                                <h4>Provincia: </h4>
+                                <div class="select-style">
+                                    <select id="provincias" name="provincias" onchange="getDistritos(this.value)">
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h4>Distrito: </h4>
+                                <div class="select-style">
+                                    <select id="distritos" name="distritos" onchange="getAsociados(this.value)">
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h4>Asociado: </h4>
+                                <div class="select-style">
+                                    <select id="asociados" name="asociados" onchange="getAsociadoById(this.value)">
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h2>Montones de beneficios te estan esperando</h2>
+                            <div class="icon-box circled icon-box-animated" data-animation="fadeInLeft" data-animation-delay="400">
+                                <div class="icon">
+                                    <i class="entypo search"></i>
+                                </div>
+                                <div class="icon-box-body">
+                                    <h4>Busque dentro de nuestra red de socios</h4>
+                                    <p>Podes disfrutar de todos los beneficios que nuestros socios brindan.</p>
+                                </div>
+                            </div>
+
+                            <div class="icon-box circled icon-box-animated" data-animation="fadeInLeft" data-animation-delay="200">
+                                <div class="icon">
+                                    <i class="entypo vcard"></i>
+                                </div>
+                                <div class="icon-box-body">
+                                    <h4>Contacto detallado</h4>
+                                    <p>Te brindamos la informacion necesaria para ponerte en contacto</p>
+                                </div>
+                            </div>
+
+                            <div class="icon-box circled icon-box-animated" data-animation="fadeInLeft" data-animation-delay="400">
+                                <div class="icon">
+                                    <i class="entypo check"></i>
+                                </div>
+                                <div class="icon-box-body">
+                                    <h4>Amplia trayectoria</h4>
+                                    <p>Todos nuestros socios son profesionales aprobados.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="spacer-sm"></div>
+
+                    <div id="store_details" class="hidden">
+                        <div class="col-md-6">
+                            <div class="googlemap-wrapper">
+                                <div id="map_canvas" class="map-canvas"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h2 id="store_name">Store Name</h2>
+                            <p id="store_description">Store Description</p>
+
+                            <p id="store_hours">Store Open Hours.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Page Content / End -->
+
+            <!-- Footer -->
+            <div th:replace="fragments :: footer"> </div>
+            <!-- Footer / End -->
+
+        </div>
+        <!-- Main / End -->
+	</div>
+	
+	<!-- Javascript Files
+	================================================== -->
+	<script src="vendor/jquery-1.11.0.min.js"></script>
+	<script src="vendor/jquery-migrate-1.2.1.min.js"></script>
+	<script src="vendor/bootstrap.js"></script>
+	<script src="vendor/jquery.flexnav.min.js"></script>
+	<script src="vendor/jquery.hoverIntent.minified.js"></script>
+	<script src="vendor/jquery.flickrfeed.js"></script>
+	<script src="vendor/isotope/isotope.pkgd.min.js"></script>
+	<script src="vendor/isotope/jquery.imagesloaded.min.js"></script>
+	<script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
+	<script src="vendor/owl-carousel/owl.carousel.min.js"></script>
+	<script src="vendor/jquery.fitvids.js"></script>
+	<script src="vendor/jquery.appear.js"></script>
+	<script src="vendor/jquery.stellar.min.js"></script>
+	<script src="vendor/flexslider/jquery.flexslider-min.js"></script>
+
+	<!-- Newsletter Form -->
+	<script src="vendor/jquery.validate.js"></script>
+	<script src="js/newsletter.js"></script>
+
+	<script src="js/custom.js"></script>
+
+	<script>
+		jQuery(function($){
+			$('body').addClass('loading');
+		});
+		
+		$(window).load(function(){
+			$('.flexslider').flexslider({
+				animation: "fade",
+				controlNav: true,
+				directionNav: false,
+				prevText: "",
+				nextText: "",
+				start: function(slider){
+					$('body').removeClass('loading');
+				}
+			});
+		});
+	</script>
+
+    <script>
+        function getProvincias(idDepartamento){
+            $.ajax({
+                dataType: "json",
+                url: "http://localhost:8080/provincias/" + idDepartamento,
+                data: "",
+                success: function(response){
+                    $('#provincias').children().remove().end().append('<option selected value="0">Seleccione una provincia</option>') ;
+                    $.each( response, function( key, val ) {
+                        $('#provincias').append($('<option>', {
+                            value: val.idProvincia,
+                            text : val.nombreProvincia
+                        }));
+                    });
+
+                },
+                error: function(){
+                    alert('Error al intentar obtener provincias.');
+                }
+            });
+
+        }
+
+        function getDistritos(idProvincia){
+            var idDepartamento = $('#departamentos').find(":selected").val();
+            $.ajax({
+                dataType: "json",
+                url: "http://localhost:8080/distritos/" + idDepartamento + "/" + idProvincia,
+                data: "",
+                success: function(response){
+                    $('#distritos').children().remove().end().append('<option selected value="0">Seleccione un distrito</option>') ;
+                    $.each( response, function( key, val ) {
+                        $('#distritos').append($('<option>', {
+                            value: val.idDistrito,
+                            text : val.nombreDistrito
+                        }));
+                    });
+
+                },
+                error: function(){
+                    alert('Error al intentar obtener provincias.');
+                }
+            });
+
+        }
+
+        function getAsociados(idDistrito){
+            $.ajax({
+                dataType: "json",
+                url: "http://localhost:8080/asociados/byDistrito/" + idDistrito,
+                data: "",
+                success: function(response){
+                    $('#asociados').children().remove().end().append('<option selected value="0">Seleccione un asociado</option>') ;
+                    $.each( response, function( key, val ) {
+                        $('#asociados').append($('<option>', {
+                            value: val.idAsociado,
+                            text : val.nombreNegocio
+                        }));
+                    });
+
+                },
+                error: function(){
+                    alert('Error al intentar obtener asociados.');
+                }
+            });
+
+        }
+
+        function getAsociadoById(idAsociado){
+            $.ajax({
+                dataType: "json",
+                url: "http://localhost:8080/asociados/" + idAsociado,
+                data: "",
+                success: function(response){
+
+                    console.log(response);
+
+                    var store = response;
+
+                    document.getElementById("store_name").innerHTML = store.nombreNegocio;
+                    document.getElementById("store_description").innerHTML = store.descripcion;
+                    document.getElementById("store_hours").innerHTML = store.horarioAtencion;
+
+                    jQuery(function($){
+                        $('#map_canvas').gmap3({
+                            marker:{
+                                //address: '-12.0666101,-76.9493107'
+                                address: store.coordenadas
+                            },
+                            key: 'AIzaSyAQJM9Kw4el8c6-soV8s3ScxWpnrUYcaL0',
+                            map:{
+                                options:{
+                                    zoom: 17,
+                                    scrollwheel: false,
+                                    streetViewControl : true
+                                }
+                            }
+                        });
+                    });
+
+                    document.getElementById("store_details").className = "box row";
+                },
+                error: function(){
+                    alert('Error al intentar obtener asociados.');
+                }
+            });
+
+        }
+    </script>
+
+    <!-- Google Map -->
+    <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script src="vendor/jquery.gmap3.min.js"></script>
+	
+</body>
+</html>

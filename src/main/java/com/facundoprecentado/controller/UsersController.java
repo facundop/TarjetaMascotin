@@ -26,7 +26,6 @@ public class UsersController {
     public @ResponseBody
     Collection<User> getUsers() {
         Collection<User> clients = userService.findAll();
-
         return clients;
     }
 }

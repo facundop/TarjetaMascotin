@@ -69,12 +69,12 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6">
-							<h1>Socio</h1>
+							<h1>Asociado</h1>
 						</div>
 						<div class="col-md-6">
 							<ul class="breadcrumb">
 								<li><a href="/">Inicio</a></li>
-								<li class="active">Socio</li>
+								<li class="active">Asociado</li>
 							</ul>
 						</div>
 					</div>
@@ -90,22 +90,46 @@
 						<div class="col-md-12">
 							<div class="box">
 								<h3>Por favor completa tus datos.</h3>
-								<form id="registration-form" action="#" th:action="@{/logged-socio-save}" th:object="${socio}" method="POST" role="form">
+								<form id="registration-form" action="#" th:action="@{/logged-asociado-save}" th:object="${asociado}" method="POST" role="form">
 										<div class="form-group">
 											<label>Usuario <span class="required">*</span></label>
 											<input type="text" name="username" th:field="*{username}" class="form-control" readonly>
 										</div>
 										<div class="form-group">
-											<label>Nombre <span class="required">*</span></label>
-											<input type="text" name="nombre" th:field="*{nombre}" class="form-control">
+											<label>Nombre del Negocio <span class="required">*</span></label>
+											<input type="text" name="nombreNegocio" placeholder="Por Ej: SuperPet" th:field="*{nombreNegocio}" class="form-control">
 										</div>
 										<div class="form-group">
-											<label>Apellido <span class="required">*</span></label>
-											<input type="text" name="apellido" th:field="*{apellido}" class="form-control">
+											<label>Descripcion del Negocio <span class="required">*</span></label>
+											<textarea name="descripcion" placeholder="Por Ej: Pet Shop y Veterinaria con mas de 2 decadas de trayectoria" th:field="*{descripcion}" class="form-control" />
 										</div>
 										<div class="form-group">
-											<label>DNI <span class="required">*</span></label>
-											<input type="number" name="dni" th:field="*{dni}" class="form-control">
+											<label>Direccion <span class="required">*</span></label>
+											<input type="text" name="direccion" placeholder="Por Ej: Av. Los Ingenieros 505, Santa Patricia, La Molina" th:field="*{direccion}" class="form-control">
+										</div>
+										<div class="form-group">
+											<label>Horario de atencion <span class="required">*</span></label>
+											<input type="text" name="horarioAtencion" placeholder="Por Ej: De Lunes a Viernes de 8:30 AM a 8:30 PM" th:field="*{horarioAtencion}" class="form-control">
+										</div>
+										<div class="form-group">
+											<label>Mail de atencion al publico <span class="required">*</span></label>
+											<input type="email" name="mailAtencion" placeholder="Por Ej: contacto@superpet.com" th:field="*{mailAtencion}" class="form-control">
+										</div>
+										<div class="form-group">
+											<label>Telefono de atencion al publico <span class="required">*</span></label>
+											<input type="text" name="telefono" placeholder="Por Ej: 475 3364" th:field="*{telefono}" class="form-control">
+										</div>
+										<div class="form-group">
+											<label>Celular de atencion al publico <span class="required">*</span></label>
+											<input type="text" name="celular" placeholder="Por Ej: 994 084 642" th:field="*{celular}" class="form-control">
+										</div>
+										<div class="form-group">
+											<label>Sitio web <span class="required">*</span></label>
+											<input type="text" name="website" placeholder="Por Ej: www.superpet.com" th:field="*{website}" class="form-control">
+										</div>
+										<div class="form-group">
+											<label>Facebook <span class="required">*</span></label>
+											<input type="text" name="facebook" placeholder="Por Ej: facebook.com/superpet" th:field="*{facebook}" class="form-control">
 										</div>
 										<button type="submit" class="btn btn-primary btn-inline">Guardar</button>&nbsp; &nbsp; &nbsp;
 								</form>

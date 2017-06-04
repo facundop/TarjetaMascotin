@@ -55,8 +55,8 @@ public class HomeController {
 
     @RequestMapping("/home")
     public String home(Model model, Principal principal) {
-        List<Ubicacion> departamentos = ubicacionRepository.findDepartamentos();
-        model.addAttribute("departamentos", departamentos);
+        List<Asociado> asociados = asociadoRepository.findAsociadosByEnabled(true);
+        model.addAttribute("asociados", asociados);
 
         if(principal != null) { // Esta logeado
             log.info("Usuario logeado: " + principal.getName());
@@ -68,34 +68,6 @@ public class HomeController {
     @RequestMapping("/plans")
     public String plans() {
         return "plans";
-    }
-
-    @RequestMapping("/login")
-    public String login(Model model, Principal principal) {
-        model.addAttribute("user", new User());
-
-        if(principal != null) { // Esta logeado
-            log.info("principal " + principal.getName());
-            User user = userRepository.findByUsername(principal.getName());
-            if(user.getType() == 0) { // Es Socio
-                // TODO Tengo que buscar sus datos y ver si existe.
-                Socio socio = socioRepository.findOne(user.getUsername());
-                if(socio == null) { // No tiene nada guardado
-                    socio = new Socio();
-                    socio.setUsername(user.getUsername());
-                }
-
-                model.addAttribute("socio", socio);
-
-                return "logged-socio";
-            } else if(user.getType() == 1) { // Es Asociado
-                return "logged-asociado";
-            }
-        } else {
-            log.info("not logged");
-        }
-
-        return "login";
     }
 
     /*
@@ -124,26 +96,26 @@ public class HomeController {
     /*
      * Busco los Asoaciados que perteneces a un ID Distrito especifico
      */
-    @RequestMapping(value = "/asociados/byDistrito/{idDistrito}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    List<Asociado> getAsociadosByIdDistrito(@PathVariable(value="idDistrito") Integer idDistrito) {
-        log.info("getAsociadosByIdDistrito");
-        List<Asociado> asociados = asociadoRepository.findByIdDistrito(idDistrito);
-
-        return asociados;
-    }
+//    @RequestMapping(value = "/asociados/byDistrito/{idDistrito}", method = RequestMethod.GET, produces = "application/json")
+//    public @ResponseBody
+//    List<Asociado> getAsociadosByIdDistrito(@PathVariable(value="idDistrito") Integer idDistrito) {
+//        log.info("getAsociadosByIdDistrito");
+//        List<Asociado> asociados = asociadoRepository.findByIdDistrito(idDistrito);
+//
+//        return asociados;
+//    }
 
     /*
      * Busco un Asoaciado por su ID
      */
-    @RequestMapping(value = "/asociados/{idAsociado}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    Asociado getAsociadosById(@PathVariable(value="idAsociado") Integer idAsociado) {
-        log.info("getAsociadosByIdDistrito");
-        Asociado asociado = asociadoRepository.findByIdAsociado(idAsociado);
-
-        return asociado;
-    }
+//    @RequestMapping(value = "/asociados/{idAsociado}", method = RequestMethod.GET, produces = "application/json")
+//    public @ResponseBody
+//    Asociado getAsociadosById(@PathVariable(value="idAsociado") Integer idAsociado) {
+//        log.info("getAsociadosByIdDistrito");
+//        Asociado asociado = asociadoRepository.findByIdAsociado(idAsociado);
+//
+//        return asociado;
+//    }
 
     @RequestMapping("/registration")
     public String registration(Model model) {
@@ -161,6 +133,7 @@ public class HomeController {
             try {
                 user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
                 userRepository.save(user);
+                mailService.sendNewUserMail(user);
                 return "registration-success";
             } catch (Error e) {
                 return "error";
@@ -186,7 +159,7 @@ public class HomeController {
     @PostMapping("/logged-socio-save")
     public String saveSocioDetails(@ModelAttribute Socio socio) {
         log.info("saveSocioDetails");
-        log.info("Guardanto datos de usuario: " + socio.getUsername());
+        log.info("Guardando datos de usuario: " + socio.getUsername());
 
         try {
             socioRepository.save(socio);
@@ -197,6 +170,22 @@ public class HomeController {
         // TODO comprobar que se registre y en caso de error actuar
 
         return "socio-save-success";
+    }
+
+    @PostMapping("/logged-asociado-save")
+    public String saveAsociadoDetails(@ModelAttribute Asociado asociado) {
+        log.info("saveAsociadoDetails");
+        log.info("Guardando datos de usuario: " + asociado.getUsername());
+
+        try {
+            asociadoRepository.save(asociado);
+        } catch (Error e) {
+            return "error";
+        }
+
+        // TODO comprobar que se registre y en caso de error actuar
+
+        return "asociado-save-success";
     }
 
     @RequestMapping("/contacts")
@@ -210,7 +199,7 @@ public class HomeController {
     public String contactSuccess(@ModelAttribute Guest guest) {
         log.info("POST contacts");
         log.info("Enviando: " + guest.getEmail() + " " + guest.getMessage());
-        // mailService.sendContactMail(guest);
+        mailService.sendContactMail(guest);
         return "contacts-success";
     }
 

@@ -20,18 +20,18 @@
 	<!-- CSS
 	================================================== -->
 	<!-- Base + Vendors CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css" />
-	<link rel="stylesheet" href="css/fonts/font-awesome/css/font-awesome.css" />
-	<link rel="stylesheet" href="css/fonts/entypo/css/entypo.css" />
-	<link rel="stylesheet" href="vendor/owl-carousel/owl.carousel.css" media="screen" />
-	<link rel="stylesheet" href="vendor/owl-carousel/owl.theme.css" media="screen" />
-	<link rel="stylesheet" href="vendor/magnific-popup/magnific-popup.css" media="screen" />
-	<link rel="stylesheet" href="vendor/flexslider/flexslider.css" media="screen" />
+	<link rel="stylesheet" th:href="@{~/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{~/css/fonts/font-awesome/css/font-awesome.css}" />
+	<link rel="stylesheet" th:href="@{~/css/fonts/entypo/css/entypo.css}" />
+	<link rel="stylesheet" th:href="@{~/vendor/owl-carousel/owl.carousel.css}" media="screen" />
+	<link rel="stylesheet" th:href="@{~/vendor/owl-carousel/owl.theme.css}" media="screen" />
+	<link rel="stylesheet" th:href="@{~/vendor/magnific-popup/magnific-popup.css}" media="screen" />
+	<link rel="stylesheet" th:href="@{~/vendor/flexslider/flexslider.css}" media="screen" />
 
 	<!-- Theme CSS-->
-	<link rel="stylesheet" href="css/theme.css" />
-	<link rel="stylesheet" href="css/theme-elements.css" />
-	<link rel="stylesheet" href="css/animate.min.css" />
+	<link rel="stylesheet" th:href="@{~/css/theme.css}" />
+	<link rel="stylesheet" th:href="@{~/css/theme-elements.css}" />
+	<link rel="stylesheet" th:href="@{~/css/animate.min.css}" />
 
 
 
@@ -88,47 +88,9 @@
             <section class="page-content">
                 <div class="container">
                     <div class="row box">
-                        <div class="col-md-6">
-                            <h2>Nuestra red de socios</h2>
-
-                            <div class="form-group">
-                                <h4>Departamento: </h4>
-                                <div class="select-style">
-                                    <select id="departamentos" name="departamentos" onchange="getProvincias(this.value)">
-                                        <option value="0">Seleccione un departamento</option>
-                                        <option th:each="departamento : ${departamentos}" th:value="${departamento.idDepartamento}" th:text="${departamento.nombreDepartamento}"
-                                        />
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group provincias">
-                                <h4>Provincia: </h4>
-                                <div class="select-style">
-                                    <select id="provincias" name="provincias" onchange="getDistritos(this.value)">
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <h4>Distrito: </h4>
-                                <div class="select-style">
-                                    <select id="distritos" name="distritos" onchange="getAsociados(this.value)">
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <h4>Asociado: </h4>
-                                <div class="select-style">
-                                    <select id="asociados" name="asociados" onchange="getAsociadoById(this.value)">
-
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <h2>Montones de beneficios te estan esperando</h2>
-                            <div class="icon-box circled icon-box-animated" data-animation="fadeInLeft" data-animation-delay="400">
+                            <div class="icon-box circled icon-box-animated" data-animation="fadeInLeft" data-animation-delay="100">
                                 <div class="icon">
                                     <i class="entypo search"></i>
                                 </div>
@@ -148,7 +110,7 @@
                                 </div>
                             </div>
 
-                            <div class="icon-box circled icon-box-animated" data-animation="fadeInLeft" data-animation-delay="400">
+                            <div class="icon-box circled icon-box-animated" data-animation="fadeInLeft" data-animation-delay="300">
                                 <div class="icon">
                                     <i class="entypo check"></i>
                                 </div>
@@ -162,19 +124,33 @@
 
                     <div class="spacer-sm"></div>
 
-                    <div id="store_details" class="hidden">
-                        <div class="col-md-6">
-                            <div class="googlemap-wrapper">
-                                <div id="map_canvas" class="map-canvas"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <h2 id="store_name">Store Name</h2>
-                            <p id="store_description">Store Description</p>
+                    <div class="container">
+                        <ul class="team-list row">
+                            <li class="team-item col-md-3" th:each="asociado : ${asociados}">
+                                <div class="team-item-inner">
+                                    <figure class="team-thumb">
+                                        <img src="http://placehold.it/288x268" alt="">
 
-                            <p id="store_hours">Store Open Hours.</p>
-                        </div>
+                                        <div class="overlay"></div>
+
+                                        <ul class="team-social list-unstyled">
+                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                        </ul>
+                                    </figure>
+                                    <header class="team-head">
+                                        <h5 class="team-name" th:text="${asociado.nombreNegocio}"></h5>
+                                        <span class="team-head-info" th:text="${asociado.direccion}"></span>
+                                    </header>
+                                    <div class="team-excerpt" th:text="${asociado.descripcion}">
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
                     </div>
+
                 </div>
             </section>
             <!-- Page Content / End -->
@@ -228,116 +204,6 @@
 			});
 		});
 	</script>
-
-    <script>
-        function getProvincias(idDepartamento){
-            $.ajax({
-                dataType: "json",
-                url: "http://localhost:8080/provincias/" + idDepartamento,
-                data: "",
-                success: function(response){
-                    $('#provincias').children().remove().end().append('<option selected value="0">Seleccione una provincia</option>') ;
-                    $.each( response, function( key, val ) {
-                        $('#provincias').append($('<option>', {
-                            value: val.idProvincia,
-                            text : val.nombreProvincia
-                        }));
-                    });
-
-                },
-                error: function(){
-                    alert('Error al intentar obtener provincias.');
-                }
-            });
-
-        }
-
-        function getDistritos(idProvincia){
-            var idDepartamento = $('#departamentos').find(":selected").val();
-            $.ajax({
-                dataType: "json",
-                url: "http://localhost:8080/distritos/" + idDepartamento + "/" + idProvincia,
-                data: "",
-                success: function(response){
-                    $('#distritos').children().remove().end().append('<option selected value="0">Seleccione un distrito</option>') ;
-                    $.each( response, function( key, val ) {
-                        $('#distritos').append($('<option>', {
-                            value: val.idDistrito,
-                            text : val.nombreDistrito
-                        }));
-                    });
-
-                },
-                error: function(){
-                    alert('Error al intentar obtener provincias.');
-                }
-            });
-
-        }
-
-        function getAsociados(idDistrito){
-            $.ajax({
-                dataType: "json",
-                url: "http://localhost:8080/asociados/byDistrito/" + idDistrito,
-                data: "",
-                success: function(response){
-                    $('#asociados').children().remove().end().append('<option selected value="0">Seleccione un asociado</option>') ;
-                    $.each( response, function( key, val ) {
-                        $('#asociados').append($('<option>', {
-                            value: val.idAsociado,
-                            text : val.nombreNegocio
-                        }));
-                    });
-
-                },
-                error: function(){
-                    alert('Error al intentar obtener asociados.');
-                }
-            });
-
-        }
-
-        function getAsociadoById(idAsociado){
-            $.ajax({
-                dataType: "json",
-                url: "http://localhost:8080/asociados/" + idAsociado,
-                data: "",
-                success: function(response){
-
-                    console.log(response);
-
-                    var store = response;
-
-                    document.getElementById("store_name").innerHTML = store.nombreNegocio;
-                    document.getElementById("store_description").innerHTML = store.descripcion;
-                    document.getElementById("store_hours").innerHTML = store.horarioAtencion;
-
-                    jQuery(function($){
-                        $('#map_canvas').gmap3({
-                            marker:{
-                                //address: '-12.0666101,-76.9493107'
-                                address: store.coordenadas
-                            },
-                            key: 'AIzaSyAQJM9Kw4el8c6-soV8s3ScxWpnrUYcaL0',
-                            map:{
-                                options:{
-                                    zoom: 17,
-                                    scrollwheel: false,
-                                    streetViewControl : true
-                                }
-                            }
-                        });
-                    });
-
-                    document.getElementById("store_details").className = "box row";
-                },
-                error: function(){
-                    alert('Error al intentar obtener asociados.');
-                }
-            });
-
-        }
-    </script>
 
     <!-- Google Map -->
     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>

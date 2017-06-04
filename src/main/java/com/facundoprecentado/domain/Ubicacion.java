@@ -4,9 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- * Created by facundo on 28/1/2017.
- */
 @Entity
 @Table
 public class Ubicacion {
