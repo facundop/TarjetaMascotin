@@ -9,21 +9,13 @@ import com.facundoprecentado.service.MailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.SecurityContextProvider;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class HomeController {
@@ -35,9 +27,6 @@ public class HomeController {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private UbicacionRepository ubicacionRepository;
@@ -105,61 +94,13 @@ public class HomeController {
 //        return asociados;
 //    }
 
-    /*
-     * Busco un Asoaciado por su ID
-     */
-//    @RequestMapping(value = "/asociados/{idAsociado}", method = RequestMethod.GET, produces = "application/json")
-//    public @ResponseBody
-//    Asociado getAsociadosById(@PathVariable(value="idAsociado") Integer idAsociado) {
-//        log.info("getAsociadosByIdDistrito");
-//        Asociado asociado = asociadoRepository.findByIdAsociado(idAsociado);
-//
-//        return asociado;
-//    }
-
-    @RequestMapping("/registration")
-    public String registration(Model model) {
-        log.info("GET registration");
-        model.addAttribute("user", new User());
-        return "registration";
-    }
-
-    @PostMapping("/registration")
-    public String registration(@ModelAttribute User user) {
-        log.info("POST registration");
-        log.info("Intentando registrar usuario: " + user.getUsername());
-
-        if(!isUserRegistered(user)) {
-            try {
-                user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-                userRepository.save(user);
-                mailService.sendNewUserMail(user);
-                return "registration-success";
-            } catch (Error e) {
-                return "error";
-            }
-        } else {
-            return "registration-fail";
-        }
-
-
-
-        // TODO comprobar que se registre y en caso de error actuar
-
-
-    }
-
-    private boolean isUserRegistered(User user) {
-        if(userRepository.findByUsername(user.getUsername()) == null) {
-            return false;
-        }
-        return true;
-    }
-
     @PostMapping("/logged-socio-save")
     public String saveSocioDetails(@ModelAttribute Socio socio) {
-        log.info("saveSocioDetails");
-        log.info("Guardando datos de usuario: " + socio.getUsername());
+        Socio temp = socioRepository.findByUsername(socio.getUsername());
+
+        if(temp != null) { // Ya existe en la tabla de socios, no tengo que crear uno
+            socio.setId(temp.getId());
+        }
 
         try {
             socioRepository.save(socio);
@@ -167,23 +108,22 @@ public class HomeController {
             return "error";
         }
 
-        // TODO comprobar que se registre y en caso de error actuar
-
         return "socio-save-success";
     }
 
     @PostMapping("/logged-asociado-save")
     public String saveAsociadoDetails(@ModelAttribute Asociado asociado) {
-        log.info("saveAsociadoDetails");
-        log.info("Guardando datos de usuario: " + asociado.getUsername());
+        Asociado temp = asociadoRepository.findByUsername(asociado.getUsername());
+
+        if(temp != null) { // Ya existe en la tabla de asociado, no tengo que crear uno
+            asociado.setId(temp.getId());
+        }
 
         try {
             asociadoRepository.save(asociado);
         } catch (Error e) {
             return "error";
         }
-
-        // TODO comprobar que se registre y en caso de error actuar
 
         return "asociado-save-success";
     }

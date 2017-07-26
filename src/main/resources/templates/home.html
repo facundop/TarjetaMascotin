@@ -129,7 +129,7 @@
                             <li class="team-item col-md-3" th:each="asociado : ${asociados}">
                                 <div class="team-item-inner">
                                     <figure class="team-thumb">
-                                        <img src="http://placehold.it/288x268" alt="">
+                                        <img src="images/asociado-sin-logo.png" alt="Asociado sin logo">
 
                                         <div class="overlay"></div>
 
@@ -143,9 +143,7 @@
                                         <h5 class="team-name" th:text="${asociado.nombreNegocio}"></h5>
                                         <span class="team-head-info" th:text="${asociado.direccion}"></span>
                                     </header>
-                                    <div class="team-excerpt" th:text="${asociado.descripcion}">
-                                    </div>
-                                </div>
+                                    <div class="team-excerpt"><a th:href="@{/asociados/} + ${asociado.id}">Ver descuentos</a></div>                                </div>
                             </li>
                         </ul>
 

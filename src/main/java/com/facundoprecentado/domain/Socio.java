@@ -14,6 +14,7 @@ public class Socio {
     private String nombre;
     private String apellido;
     private int dni;
+    private int cantidadMascotas;
 
     public String getUsername() {
         return username;
@@ -53,5 +54,13 @@ public class Socio {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getCantidadMascotas() {
+        return cantidadMascotas;
+    }
+
+    public void setCantidadMascotas(int cantidadMascotas) {
+        this.cantidadMascotas = cantidadMascotas;
     }
 }
