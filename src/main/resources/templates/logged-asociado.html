@@ -2,63 +2,74 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-	<!-- Basic Page Needs
+<!-- Basic Page Needs
 	================================================== -->
-	<meta charset="utf-8">
-	<title>Registro | TarjetaMascotin</title>
-	<meta name="description" content="PetSitter - Responsive HTML5 Template - 1.0">
-	<meta name="author" content="http://themeforest.net/user/dan_fisher">
+<meta charset="utf-8">
+<title>Registro | TarjetaMascotin</title>
+<meta name="description"
+	content="PetSitter - Responsive HTML5 Template - 1.0">
+<meta name="author" content="http://themeforest.net/user/dan_fisher">
 
-	<!-- Mobile Specific Metas
+<!-- Mobile Specific Metas
 	================================================== -->
-	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-	
-	<!-- Google Web Fonts
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+
+<!-- Google Web Fonts
 	================================================== -->
-	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic|Bitter:700' rel='stylesheet' type='text/css'>
-	
-	<!-- CSS
+<link
+	href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic|Bitter:700'
+	rel='stylesheet' type='text/css'>
+
+<!-- CSS
 	================================================== -->
-	<!-- Base + Vendors CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/fonts/font-awesome/css/font-awesome.css">
-	<link rel="stylesheet" href="css/fonts/entypo/css/entypo.css">
-	<link rel="stylesheet" href="vendor/owl-carousel/owl.carousel.css" media="screen">
-	<link rel="stylesheet" href="vendor/owl-carousel/owl.theme.css" media="screen">
-	<link rel="stylesheet" href="vendor/magnific-popup/magnific-popup.css" media="screen">
+<!-- Base + Vendors CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="css/fonts/font-awesome/css/font-awesome.css">
+<link rel="stylesheet" href="css/fonts/entypo/css/entypo.css">
+<link rel="stylesheet" href="vendor/owl-carousel/owl.carousel.css"
+	media="screen">
+<link rel="stylesheet" href="vendor/owl-carousel/owl.theme.css"
+	media="screen">
+<link rel="stylesheet" href="vendor/magnific-popup/magnific-popup.css"
+	media="screen">
 
-	<!-- Theme CSS-->
-	<link rel="stylesheet" href="css/theme.css">
-	<link rel="stylesheet" href="css/theme-elements.css">
-	<link rel="stylesheet" href="css/animate.min.css">
+<!-- Theme CSS-->
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/theme-elements.css">
+<link rel="stylesheet" href="css/animate.min.css">
 
-	<!-- Head Libs -->
-	<script src="vendor/modernizr.js"></script>
+<!-- Head Libs -->
+<script src="vendor/modernizr.js"></script>
 
-	<!--[if lt IE 9]>
+<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<script src="vendor/respond.min.js"></script>
 	<![endif]-->
 
-	<!--[if IE]>
+<!--[if IE]>
 		<link rel="stylesheet" href="css/ie.css">
 	<![endif]-->
-	
-	<!-- Favicons
+
+<!-- Favicons
 	================================================== -->
-	<link rel="shortcut icon" href="images/favicon.ico">
-	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="images/apple-touch-icon-144x144.png">
-	
+<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72"
+	href="images/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114"
+	href="images/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="144x144"
+	href="images/apple-touch-icon-144x144.png">
+
 </head>
 <body>
 
 	<div class="site-wrapper">
 
 		<!-- Header -->
-		<div th:replace="fragments :: header"> </div>
+		<div th:replace="fragments :: header"></div>
 		<!-- Header / End -->
 
 		<!-- Main -->
@@ -85,53 +96,78 @@
 			<!-- Page Content -->
 			<section class="page-content">
 				<div class="container">
-					
+
 					<div class="row">
 						<div class="col-md-12">
 							<div class="box">
 								<h3>Por favor completa tus datos.</h3>
-								<form id="registration-form" action="#" th:action="@{/logged-asociado-save}" th:object="${asociado}" method="POST" role="form">
-										<div class="form-group">
-											<label>Usuario <span class="required">*</span></label>
-											<input type="text" name="username" th:field="*{username}" class="form-control" readonly>
-										</div>
-										<div class="form-group">
-											<label>Nombre del Negocio <span class="required">*</span></label>
-											<input type="text" name="nombreNegocio" placeholder="Por Ej: SuperPet" th:field="*{nombreNegocio}" class="form-control">
-										</div>
-										<div class="form-group">
-											<label>Descripcion del Negocio <span class="required">*</span></label>
-											<textarea name="descripcion" placeholder="Por Ej: Pet Shop y Veterinaria con mas de 2 decadas de trayectoria" th:field="*{descripcion}" class="form-control" />
-										</div>
-										<div class="form-group">
-											<label>Direccion <span class="required">*</span></label>
-											<input type="text" name="direccion" placeholder="Por Ej: Av. Los Ingenieros 505, Santa Patricia, La Molina" th:field="*{direccion}" class="form-control">
-										</div>
-										<div class="form-group">
-											<label>Horario de atencion <span class="required">*</span></label>
-											<input type="text" name="horarioAtencion" placeholder="Por Ej: De Lunes a Viernes de 8:30 AM a 8:30 PM" th:field="*{horarioAtencion}" class="form-control">
-										</div>
-										<div class="form-group">
-											<label>Mail de atencion al publico <span class="required">*</span></label>
-											<input type="email" name="mailAtencion" placeholder="Por Ej: contacto@superpet.com" th:field="*{mailAtencion}" class="form-control">
-										</div>
-										<div class="form-group">
-											<label>Telefono de atencion al publico <span class="required">*</span></label>
-											<input type="text" name="telefono" placeholder="Por Ej: 475 3364" th:field="*{telefono}" class="form-control">
-										</div>
-										<div class="form-group">
-											<label>Celular de atencion al publico <span class="required">*</span></label>
-											<input type="text" name="celular" placeholder="Por Ej: 994 084 642" th:field="*{celular}" class="form-control">
-										</div>
-										<div class="form-group">
-											<label>Sitio web <span class="required">*</span></label>
-											<input type="text" name="website" placeholder="Por Ej: www.superpet.com" th:field="*{website}" class="form-control">
-										</div>
-										<div class="form-group">
-											<label>Facebook <span class="required">*</span></label>
-											<input type="text" name="facebook" placeholder="Por Ej: facebook.com/superpet" th:field="*{facebook}" class="form-control">
-										</div>
-										<button type="submit" class="btn btn-primary btn-inline">Guardar</button>&nbsp; &nbsp; &nbsp;
+								<form id="registration-form" action="#"
+									th:action="@{/logged-asociado-save}" th:object="${asociado}"
+									method="POST" role="form">
+									<div class="form-group">
+										<label>Usuario <span class="required">*</span></label> <input
+											type="text" name="username" th:field="*{username}"
+											class="form-control" readonly>
+									</div>
+									<div class="form-group">
+										<label>Nombre del Negocio <span class="required">*</span></label>
+										<input type="text" name="nombreNegocio"
+											placeholder="Por Ej: SuperPet" th:field="*{nombreNegocio}"
+											class="form-control">
+									</div>
+									<div class="form-group">
+										<label>Descripcion del Negocio <span class="required">*</span></label>
+										<textarea name="descripcion"
+											placeholder="Por Ej: Pet Shop y Veterinaria con mas de 2 decadas de trayectoria"
+											th:field="*{descripcion}" class="form-control"></textarea>
+
+									</div>
+									<div class="form-group">
+										<label>Direccion <span class="required">*</span></label> <input
+											type="text" name="direccion"
+											placeholder="Por Ej: Av. Los Ingenieros 505, Santa Patricia, La Molina"
+											th:field="*{direccion}" class="form-control">
+									</div>
+									<div class="form-group">
+										<label>Horario de atencion <span class="required">*</span></label>
+										<input type="text" name="horarioAtencion"
+											placeholder="Por Ej: De Lunes a Viernes de 8:30 AM a 8:30 PM"
+											th:field="*{horarioAtencion}" class="form-control">
+									</div>
+									<div class="form-group">
+										<label>Mail de atencion al publico <span
+											class="required">*</span></label> <input type="email"
+											name="mailAtencion"
+											placeholder="Por Ej: contacto@superpet.com"
+											th:field="*{mailAtencion}" class="form-control">
+									</div>
+									<div class="form-group">
+										<label>Telefono de atencion al publico <span
+											class="required">*</span></label> <input type="text" name="telefono"
+											placeholder="Por Ej: 475 3364" th:field="*{telefono}"
+											class="form-control">
+									</div>
+									<div class="form-group">
+										<label>Celular de atencion al publico <span
+											class="required">*</span></label> <input type="text" name="celular"
+											placeholder="Por Ej: 994 084 642" th:field="*{celular}"
+											class="form-control">
+									</div>
+									<label for="website">Sitio Web</label>
+									<div class="input-group">
+										<span class="input-group-addon">http://</span><input
+											type="text" name="website" placeholder="www.superpet.com"
+											th:field="*{website}" class="form-control">
+									</div>
+									<br /> <label for="facebook">Facebook</label>
+									<div class="input-group">
+										<span class="input-group-addon">http://www.facebook.com/</span>
+										<input id="email" type="text" class="form-control"
+											name="facebook" placeholder="Superpet" th:field="*{facebook}">
+									</div>
+									<br />
+									<button type="submit" class="btn btn-primary btn-inline">Guardar</button>
+									&nbsp; &nbsp; &nbsp;
 								</form>
 							</div>
 						</div>
@@ -142,9 +178,9 @@
 			<!-- Page Content / End -->
 
 			<!-- Footer -->
-			<div th:replace="fragments :: footer"> </div>
+			<div th:replace="fragments :: footer"></div>
 			<!-- Footer / End -->
-			
+
 		</div>
 		<!-- Main / End -->
 	</div>
@@ -172,6 +208,6 @@
 	<script src="js/custom.js"></script>
 
 
-	
+
 </body>
 </html>
