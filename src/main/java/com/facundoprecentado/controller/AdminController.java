@@ -1,20 +1,19 @@
 package com.facundoprecentado.controller;
 
-import com.facundoprecentado.domain.Asociado;
-import com.facundoprecentado.domain.Socio;
-import com.facundoprecentado.domain.User;
-import com.facundoprecentado.repository.SocioRepository;
-import com.facundoprecentado.repository.AsociadoRepository;
-import com.facundoprecentado.service.UserService;
+import java.security.Principal;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import com.facundoprecentado.domain.Asociado;
+import com.facundoprecentado.domain.Socio;
+import com.facundoprecentado.repository.AsociadoRepository;
+import com.facundoprecentado.repository.SocioRepository;
 
 @Controller
 public class AdminController {

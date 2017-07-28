@@ -1,8 +1,8 @@
 package com.facundoprecentado.domain;
 
-import java.util.Set;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity(name = "asociados")
 public class Asociado {
