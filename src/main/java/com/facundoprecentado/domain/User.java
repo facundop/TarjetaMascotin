@@ -11,70 +11,73 @@ import java.util.Set;
 @Entity(name = "users")
 public class User implements UserDetails {
 
-    @Id
-    private String username; // email
-    private boolean enabled;
-    private int type;
+	private static final long serialVersionUID = -4410997121666206648L;
 
-    @JsonIgnore
-    private String password;
+	@Id
+	private String username; // email
+	private boolean enabled;
+	private int type;
 
-    public User() {}
+	@JsonIgnore
+	private String password;
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
+	public User() {
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public User(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
+	@Override
+	public boolean isAccountNonExpired() {
+		return false;
+	}
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
+	@Override
+	public boolean isAccountNonLocked() {
+		return false;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return false;
+	}
 
-    public boolean isEnabled() {
-        return enabled;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
+	public boolean isEnabled() {
+		return enabled;
+	}
 
-    public int getType() {
-        return type;
-    }
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
-    public void setType(int type) {
-        this.type = type;
-    }
+	public int getType() {
+		return type;
+	}
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
+	public void setType(int type) {
+		this.type = type;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

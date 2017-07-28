@@ -78,18 +78,6 @@ public class UsersController {
 
     }
 
-    /*
-     * Busco un Asoaciado por su ID
-     */
-    @RequestMapping(value = "/asociados/{idAsociado}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    Asociado getAsociadoById(@PathVariable(value="idAsociado") Long idAsociado) {
-        Asociado asociado = asociadoRepository.findById(idAsociado);
-
-        return asociado;
-    }
-
-
     private boolean isUserRegistered(User user) {
         if(userRepository.findByUsername(user.getUsername()) == null) {
             return false;

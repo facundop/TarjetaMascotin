@@ -173,4 +173,14 @@ public class HomeController {
         return "password-recover-success";
     }
 
+	/*
+	 * Busco un Asoaciado por su ID
+	 */
+	@RequestMapping(value = "/asociados/{idAsociado}")
+	public String getAsociadoById(@PathVariable(value = "idAsociado") Long idAsociado, Model model) {
+		Asociado asociado = asociadoRepository.findById(idAsociado);
+		model.addAttribute("asociado", asociado);
+		return "asociado";
+	}
+
 }
